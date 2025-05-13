@@ -16,9 +16,4 @@
     <ProjectReference Include="..\SunglassesDAL\SunglassesDAL.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Implementations\" />
-    <Folder Include="Interfaces\" />
-  </ItemGroup>
-
 </Project>

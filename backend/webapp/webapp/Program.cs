@@ -3,6 +3,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using SunglassesDAL.Model;
+using Sunglasses.Services.Implementations;
+using Sunglasses.Services.Interfaces;
+using SunglassesDAL.Implementations;
+using SunglassesDAL.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +20,8 @@ builder.Services.AddDbContext<WebshopContext>(options =>
 
 builder.Services.AddControllers();
 
+builder.Services.AddScoped<IProducts, ProductRepository>();
+builder.Services.AddScoped<IProductService, ProductService>();
 
 builder.Services.AddCors(options =>
 {

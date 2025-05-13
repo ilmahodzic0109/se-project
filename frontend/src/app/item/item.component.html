@@ -1,3 +1,4 @@
+
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 
 <div class="breadcrumbs">
@@ -27,8 +28,8 @@
                         <main id="gallery">
                             <div class="main-img">
                                 <div class="deleted-product-overlay">
-                                    <img src="assets/images/sample.jpg" alt="Product Name" id="current">
-                                    <span class="deleted-label">Deleted</span>
+                                    <img [src]="productDetails?.image"
+                                    alt="{{ productDetails?.name }}" id="current">
                                 </div>
                             </div>
                         </main>
@@ -36,75 +37,71 @@
                 </div>
                 <div class="col-lg-6 col-md-12 col-12">
                     <div class="product-info">
-                        <h2 class="title">Brand Name</h2>
+                        <h2 class="title">{{ productDetails?.brand }}</h2>
                         <p class="location">
-                            <a href="javascript:void(0)">Category Name</a>
+                            <a href="javascript:void(0)">{{ productDetails?.category }}</a>
                         </p>
-                        <h3 class="price">$99.99</h3>
+                        <h3 class="price">${{ productDetails?.price }}</h3>
                         <div class="list-info">
-                            <h4>Informations</h4>
-                            <ul>
-                                <li><span>Condition:</span> New</li>
-                                <li><span>Model:</span> Model X</li>
-                                <li><span>Date Published:</span> 2025-05-09</li>
-                                <li><span>Gender:</span> Unisex</li>
-                                <li><span>Color:</span> Black</li>
-                                <li><span>Shipping Price:</span> $5.00</li>
-                                <li><span>Items Sold:</span> 10</li>
-                                <li><span>Available Items:</span> 20</li>
-                            </ul>
-                        </div>
-                        <div class="quantity-info">
-                            <h4>Quantity</h4>
-                            <input 
-                                type="number" 
-                                id="quantity" 
-                                min="1" 
-                                value="1" />
-                            <div class="error-message" style="color: #d9534f; display: none;">
-                                <p>Please enter quantity of 1 or more...</p>
-                            </div>
-                        </div>
-                        <div class="total-price">
-                            <h4>Total Price</h4>
-                            <p id="total-price">$99.99</p>
-                        </div>
-
-                        <div class="modal" style="display: none;">
-                            <div class="modal-content">
-                                <h4>Are you sure you want to delete this product?</h4>
-                                <div>
-                                    <button class="btn btn-danger">Yes, delete</button>
-                                    <button class="btn btn-secondary">Cancel</button>
+                            <h4 class="specs-title">Product Specifications</h4>
+                            <div class="specs-grid">
+                                <div class="spec-item">
+                                    <span class="spec-label">Condition:</span>
+                                    <span>{{ productDetails?.condition }}</span>
+                                </div>
+                                <div class="spec-item">
+                                    <span class="spec-label">Model:</span>
+                                    <span>{{ productDetails?.model }}</span>
+                                </div>
+                                <div class="spec-item">
+                                    <span class="spec-label">Date Published:</span>
+                                    <span>{{ productDetails?.datePublished  }}</span>
+                                </div>
+                                <div class="spec-item">
+                                    <span class="spec-label">Gender:</span>
+                                    <span>{{ productDetails?.gender }}</span>
+                                </div>
+                                <div class="spec-item">
+                                    <span class="spec-label">Color:</span>
+                                    <span>{{ productDetails?.color }}</span>
+                                </div>
+                                <div class="spec-item">
+                                    <span class="spec-label">Shipping Price:</span>
+                                    <span>${{ productDetails?.shippingPrice }}</span>
+                                </div>
+                                <div class="spec-item">
+                                    <span class="spec-label">Items Sold:</span>
+                                    <span>{{ productDetails?.itemsSold }}</span>
+                                </div>
+                                <div class="spec-item">
+                                    <span class="spec-label">Available Items:</span>
+                                    <span>{{ productDetails?.quantityInStock }}</span>
                                 </div>
                             </div>
                         </div>
-
-                        <div class="add-to-cart d-flex align-items-center">
-                            <a href="javascript:void(0)" id="add-to-cart" class="add-to-cart-btn">Add to Cart</a>
-                            <a href="javascript:void(0)" id="buy-now" class="buy-now-btn">Buy Now</a>
-                            <a href="/modify-product/123" id="add-to-cart" class="add-to-cart-btn"><i class="fa fa-pencil-alt"></i></a>
-                            <a href="javascript:void(0)" id="buy-now" class="buy-now-btn"><i class="fa fa-trash"></i></a>
-                            <a href="javascript:void(0)" id="restore-btn" class="buy-now-btn"><i class="fa fa-undo"></i></a>
+                        <div class="quantity-info">
+                            <h4>Quantity</h4>
+                            <input type="number" min="1" value="1" id="quantity" />
                         </div>
-                    </div>
+                        <div class="total-price">
+                            <h4>Total Price</h4>
+                            <p id="total-price">${{ productDetails?.price }}</p>
+                        </div>
 
-                    <div class="alert-danger" style="display: none;">
-                        You need to be logged in to add items to the cart or make a purchase.
-                    </div>
-                    <div class="alert-success" style="display: none;">
-                        Product added to cart successfully!
+                         <div class="add-to-cart d-flex align-items-center" style="margin-top: 20px;">
+                            <a href="#" class="add-to-cart-btn" >Add to Cart</a>
+                            <a href="#" class="buy-now-btn" >Buy Now</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-
         <div class="item-details-blocks">
             <div class="row">
                 <div class="col-lg-12 col-md-7 col-12">
                     <div class="single-block description">
                         <h3>Description</h3>
-                        <p>This is a detailed description of the product that would normally be loaded dynamically.</p>
+                        <p>{{productDetails?.description }}</p>
                     </div>
                 </div>
             </div>
