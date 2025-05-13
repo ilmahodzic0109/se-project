@@ -9,6 +9,9 @@ import { ItemComponent } from './item/item.component';
 import { CartComponent } from './cart/cart.component';
 import { CartItemComponent } from './cart-item/cart-item.component';
 import { ItemCategoriesComponent } from './item-categories/item-categories.component';
+import { LoginComponent } from './login/login.component';
+import { RegistrationComponent } from './registration/registration.component';
+
 
 export const appRoutes: Routes = [
   { path: '', redirectTo: 'homepage', pathMatch: 'full' },
@@ -19,6 +22,8 @@ export const appRoutes: Routes = [
   { path: 'cart', component: CartComponent },
   { path: 'cart-item', component: CartItemComponent },
   { path: 'categories', component: ItemCategoriesComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'registration', component: RegistrationComponent },
   { path: '**', redirectTo: 'homepage' },
 ];
 

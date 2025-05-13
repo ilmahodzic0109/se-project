@@ -5,6 +5,8 @@ import { FooterComponent } from './footer/footer.component';
 import { CartComponent } from './cart/cart.component';
 import { CartItemComponent } from './cart-item/cart-item.component';
 import { ItemCategoriesComponent } from './item-categories/item-categories.component';
+import { LoginComponent } from './login/login.component';
+import { RegistrationComponent } from './registration/registration.component';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +17,9 @@ import { ItemCategoriesComponent } from './item-categories/item-categories.compo
     FooterComponent,
     CartComponent,
     CartItemComponent,
-    ItemCategoriesComponent
+    ItemCategoriesComponent,
+    LoginComponent,
+    RegistrationComponent
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
