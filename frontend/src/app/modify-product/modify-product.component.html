@@ -1,1 +1,136 @@
-<p>modify-product works!</p>
+<div class="breadcrumbs">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-6 col-md-6 col-12">
+          <div class="breadcrumbs-content">
+            <h1 class="page-title">Modify product</h1>
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-12">
+          <ul class="breadcrumb-nav">
+            <li><a href="/homepage">Home</a></li>
+            <li>Modify product</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+<section class="modify-product section">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <div class="form-container">
+            <h3 class="form-heading">Modify Product</h3>
+            <form >
+              <div class="form-group">
+                <label for="name">Product Name</label>
+                <input name="name" type="text" [(ngModel)]="productDetails.name" class="form-control" required />
+              </div>
+  
+              <div class="form-group">
+                <label for="model">Model</label>
+                <input name="model" type="text" [(ngModel)]="productDetails.model" class="form-control" required />
+              </div>
+  
+              <div class="form-group">
+                <label for="description">Description</label>
+                <textarea name="description" [(ngModel)]="productDetails.description" class="form-control" rows="3" required></textarea>
+              </div>
+  
+              <div class="form-group">
+                <label for="deliveryTime">Delivery Time</label>
+                <input name="deliveryTime" type="text" [(ngModel)]="productDetails.deliveryTime" class="form-control" required />
+              </div>
+  
+              <div class="form-group">
+                <label for="image">Product Image URL</label>
+                <input name="image" type="url" [(ngModel)]="productDetails.image" class="form-control" required />
+              </div>
+  
+              <div class="form-group">
+                <label for="price">Price</label>
+                <input name="price" type="number" [(ngModel)]="productDetails.price" class="form-control" required />
+              </div>
+  
+              <div class="form-group">
+                <label for="shippingPrice">Shipping Price</label>
+                <input name="shippingPrice" type="number" [(ngModel)]="productDetails.shippingPrice" class="form-control" required />
+              </div>
+  
+              <div class="form-group">
+                <label for="colorId">Color</label>
+                <select name="colorId" [(ngModel)]="productDetails.colorId" class="form-control" required>
+                  <option value="1" [selected]="productDetails.colorId === 1">Black</option>
+                  <option value="2" [selected]="productDetails.colorId === 2">Brown</option>
+                  <option value="3" [selected]="productDetails.colorId === 3">Gold</option>
+                  <option value="4" [selected]="productDetails.colorId === 4">Silver</option>
+                  <option value="5" [selected]="productDetails.colorId === 5">Blue</option>
+                </select>
+              </div>
+              
+              <div class="form-group">
+                <label for="conditionId">Condition</label>
+                <select name="conditionId" [(ngModel)]="productDetails.conditionId" class="form-control" required>
+                  <option value="1" [selected]="productDetails.conditionId === 1">New</option>
+                  <option value="0" [selected]="productDetails.conditionId === 0">Used</option>
+                </select>
+              </div>
+              
+              <div class="form-group">
+                <label for="gender">Gender</label>
+                <select name="gender" [(ngModel)]="productDetails.gender" class="form-control" required>
+                  <option value="1" [selected]="productDetails.gender === 1">Female</option>
+                  <option value="0" [selected]="productDetails.gender === 0">Male</option>
+                </select>
+              </div>
+              
+              <div class="form-group">
+                <label for="productCategory">Product Category</label>
+                <select name="productCategory" [(ngModel)]="productDetails.productCategory" class="form-control" required>
+                  <option value="1" [selected]="productDetails.productCategory === 1">Women’s category</option>
+                  <option value="0" [selected]="productDetails.productCategory === 0">Men's category</option>
+                </select>
+              </div>
+              
+              <div class="form-group">
+                <label for="brandId">Brand</label>
+                <select name="brandId" [(ngModel)]="productDetails.brandId" class="form-control" required>
+                  <option value="1" [selected]="productDetails.brandId === 1">Ray-Ban</option>
+                  <option value="2" [selected]="productDetails.brandId === 2">Oakley</option>
+                  <option value="3" [selected]="productDetails.brandId === 3">Gucci</option>
+                  <option value="4" [selected]="productDetails.brandId === 4">Prada</option>
+                  <option value="5" [selected]="productDetails.brandId === 5">Persol</option>
+                </select>
+              </div>
+  
+              <div class="form-group">
+                <label for="quantityInStock">Quantity In Stock</label>
+                <input name="quantityInStock" type="number" [(ngModel)]="quantityInStock" class="form-control" required />
+              </div>
+  
+              <div class="form-group">
+                <label for="itemsSold">Items Sold</label>
+                <input name="itemsSold" type="number" [(ngModel)]="itemsSold" class="form-control" required />
+              </div>
+              <div *ngIf="successMessage" class="alert alert-success">
+                {{ successMessage }}
+              </div>
+            
+           
+              <div *ngIf="errorMessage" class="alert alert-danger">
+                {{ errorMessage }}
+              </div>
+              <div class="button">
+                <button type="button" class="btn btn-primary" (click)="cancelModification()">Cancel</button>
+                <button type="submit" class="btn btn-save" (click)="saveProduct()">Save</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+
+
+  

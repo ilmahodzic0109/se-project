@@ -14,4 +14,7 @@ export class ProductService {
   getProductDetails(productId: string): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/${productId}`);
   }
+  getPurchaseHistory(userId: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/purchase-history/${userId}`);
+  }
 }

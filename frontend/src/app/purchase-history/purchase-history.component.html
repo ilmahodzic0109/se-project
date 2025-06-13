@@ -47,40 +47,26 @@
                             </div>
                             <!-- End List Title -->
 
-                            <!-- Example Purchase History Items -->
-                            <div class="single-list">
-                                <div class="row align-items-center">
-                                    <div class="col-lg-4 col-md-4 col-12">
-                                        <p>Nike Air Max</p>
-                                    </div>
-                                    <div class="col-lg-3 col-md-2 col-12">
-                                        <p>2024-03-20</p>
-                                    </div>
-                                    <div class="col-lg-3 col-md-2 col-12">
-                                        <p>14:30</p>
-                                    </div>
-                                    <div class="col-lg-2 col-md-2 col-12">
-                                        <p>120$</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="single-list">
-                                <div class="row align-items-center">
-                                    <div class="col-lg-4 col-md-4 col-12">
-                                        <p>Adidas Ultraboost</p>
-                                    </div>
-                                    <div class="col-lg-3 col-md-2 col-12">
-                                        <p>2024-03-19</p>
-                                    </div>
-                                    <div class="col-lg-3 col-md-2 col-12">
-                                        <p>10:15</p>
-                                    </div>
-                                    <div class="col-lg-2 col-md-2 col-12">
-                                        <p>150$</p>
+                            <!-- Start Purchase History Loop -->
+                            <div *ngFor="let order of purchaseHistory">
+                                <div class="single-list" *ngFor="let detail of order.orderDetails">
+                                    <div class="row align-items-center">
+                                        <div class="col-lg-4 col-md-4 col-12">
+                                            <p>{{ detail.brandName }}</p>
+                                        </div>
+                                        <div class="col-lg-3 col-md-2 col-12">
+                                            <p>{{ order.orderDate }}</p>
+                                        </div>
+                                        <div class="col-lg-3 col-md-2 col-12">
+                                            <p>{{ order.orderTime }}</p>
+                                        </div>
+                                        <div class="col-lg-2 col-md-2 col-12">
+                                            <p>{{ detail.subtotal }}$</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                            <!-- End Purchase History Loop -->
                         </div>
                         <!-- End Invoice Items Area -->
                     </div>
