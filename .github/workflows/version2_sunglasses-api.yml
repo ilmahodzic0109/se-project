@@ -64,5 +64,5 @@ jobs:
         with:
           app-name: 'sunglasses-api'
           slot-name: 'Production'
-          package: .
+          package: ${{ github.workspace }}/myapp
           
