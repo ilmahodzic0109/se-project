@@ -37,7 +37,7 @@
                             
                                 <ul id="nav" class="navbar-nav ms-auto">
                                     <li class="nav-item">
-                                        <a class=" " href="#"
+                                        <a class=" " href="/homepage"
                                             data-bs-toggle="collapse" data-bs-target="#submenu-1-1"
                                             aria-controls="navbarSupportedContent" aria-expanded="false"
                                             aria-label="Toggle navigation">Home</a>
@@ -55,20 +55,20 @@
                             <div class="login-button">
                                 <ul>
                                     <li>
-                                        <a  href="/login"><i class="fas fa-sign-in-alt"></i> </a>
+                                        <a *ngIf="!isAdmin() && !isLoggedIn()" href="/login"><i class="fas fa-sign-in-alt"></i> </a>
                                     </li>
                                     <li>
-                                        <a  href="/registration"><i class="fas fa-user-plus"></i> </a>
+                                        <a *ngIf="!isAdmin() && !isLoggedIn()" href="/registration"><i class="fas fa-user-plus"></i> </a>
                                     </li>
                                     <li>
-                                        <a  href="/cart"><i class="lni lni-cart"></i></a>
-                                        <span  class="badge ms-1" style="color: #5830E0; font-size: 15px;"> 1 </span>
+                                        <a *ngIf="!isAdmin() && isLoggedIn()" href="/cart"><i class="lni lni-cart"></i></a>
+                                        <span *ngIf="!isAdmin() && isLoggedIn()" class="badge ms-1" style="color: #5830E0; font-size: 15px;"> {{ cartItemCount }} </span>
                                     </li>
                                     <li>
-                                        <a  href="/purchase-history"><i class="fas fa-history"></i></a>
+                                        <a *ngIf="!isAdmin() && isLoggedIn()" href="/purchase-history"><i class="fas fa-history"></i></a>
                                     </li>
                                     <li>
-                                        <a  href="#" ><i class="fas fa-sign-out-alt"></i></a>
+                                        <a *ngIf="isLoggedIn()" href="#" (click)="logout()"><i class="fas fa-sign-out-alt"></i></a>
                                     </li>
                                     
                                 </ul>
@@ -80,3 +80,4 @@
             </div> 
         </div> 
     </header>
+    

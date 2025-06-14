@@ -23,6 +23,5 @@ namespace Sunglasses.Services.Interfaces
        
         Task<DateTime?> GetLastAddedProductTimeAsync(Guid userId);
         
-        Task ProcessCartActivityAsync();
     }
 }

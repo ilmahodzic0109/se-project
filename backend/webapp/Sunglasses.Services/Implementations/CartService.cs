@@ -15,14 +15,12 @@ namespace Sunglasses.Services.Implementations
     {
         private readonly ICartRepository _cartRepository;
         private readonly IProducts _productRepository;
-        private readonly EmailService _emailService;
         private readonly IUserRepository _userRepository;
 
-        public CartService(ICartRepository cartRepository, IProducts productRepository, EmailService emailService, IUserRepository userRepository)
+        public CartService(ICartRepository cartRepository, IProducts productRepository, IUserRepository userRepository)
         {
             _cartRepository = cartRepository;
             _productRepository = productRepository;
-            _emailService = emailService;
             _userRepository = userRepository;
         }
 
@@ -197,28 +195,6 @@ namespace Sunglasses.Services.Implementations
 
             return lastCartItem?.AddedAt;
         }
-
-        
-        public async Task ProcessCartActivityAsync()
-        {
-            var inactivityThreshold = TimeSpan.FromMinutes(1); 
-            var inactiveUserIds = await _cartRepository.GetUsersWithInactiveCartsAsync(inactivityThreshold);
-
-            foreach (var userId in inactiveUserIds)
-            {
-                var user = await _userRepository.GetUserByIdAsync(userId); 
-                if (user != null && !string.IsNullOrEmpty(user.Email)) 
-                {
-                    
-                    await _emailService.SendEmailAsync(user.Email,
-                                                       "Your cart's waiting! Finish your purchase before it disappears!",
-                                                       "Hi, it looks like you've added some items to your cart. Did you forget to complete your order?");
-                    Console.WriteLine($"Email sent to {user.Email} for inactive cart.");
-                }
-            }
-        }
-
-
     }
 }
     

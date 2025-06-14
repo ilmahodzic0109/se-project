@@ -22,6 +22,12 @@ builder.Services.AddControllers();
 
 builder.Services.AddScoped<IProducts, ProductRepository>();
 builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<ICartRepository, CartRepository>();
+builder.Services.AddScoped<ICartService, CartService>();
+builder.Services.AddScoped<ICheckoutRepository, CheckoutRepository>();
+builder.Services.AddScoped<ICheckoutService, CheckoutService>();
 
 builder.Services.AddCors(options =>
 {

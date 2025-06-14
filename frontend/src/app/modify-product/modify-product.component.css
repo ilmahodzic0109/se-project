@@ -1,0 +1,328 @@
+.modify-product {
+    padding: 50px 0;
+    background-color: #f8f9fa;
+}
+.form-container {
+    background: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.form-heading {
+    font-size: 24px;
+    font-weight: 600;
+    color: #343a40;
+    margin-bottom: 20px;
+    text-align: center;
+}
+.alert-success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 20px;
+    font-size: 16px;
+    text-align: center;
+  }
+  .alert-danger {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #c3e6cb;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 20px;
+    font-size: 16px;
+    text-align: center;
+  }
+  /* Optional: style the form inputs */
+  .form-control {
+    margin-bottom: 10px;
+  }
+.form-group label {
+    font-size: 14px;
+    color: #495057;
+    margin-bottom: 5px;
+    display: block;
+}
+.form-group input,
+.form-group textarea,
+.form-group select {
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    padding: 10px;
+    width: 100%;
+    font-size: 14px;
+    color: #495057;
+}
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    border-color: #80bdff;
+    outline: none;
+    box-shadow: 0 0 4px rgba(0, 123, 255, 0.25);
+}
+
+/* Buttons */
+.button {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+.btn {
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.btn-primary {
+    background-color: #dc3545;
+    color: #fff;
+}
+.btn-primary:hover {
+    background-color: #c82333;
+}
+.btn-save {
+    background-color: #28a745;
+    color: #fff;
+}
+.btn-save:hover {
+    background-color: #218838;
+}
+body {
+    background-color: #f8f9fa;
+    padding-top: 20px;
+}
+
+.form-container {
+    background-color: #ffffff;
+   
+    border-radius: 8px;
+   
+}
+.button {
+    margin-top: 20px; /* Adjust this value as needed */
+    display: flex;
+    justify-content: flex-end; /* Align buttons to the right */
+    gap: 10px; /* Add spacing between the buttons */
+}
+
+.form-heading {
+   
+    margin-bottom: 30px;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+.breadcrumbs {
+    position: relative;
+    padding-bottom: 45px;
+    padding-top: 140px;
+    background: #081828;
+    z-index: 2;
+    text-align: left;
+}
+
+.breadcrumbs .breadcrumbs-content {
+    position: relative;
+    text-align: left;
+}
+
+.breadcrumbs .breadcrumbs-content .page-title {
+    font-size: 20px;
+    color: #fff;
+    font-weight: 600;
+    position: relative;
+    line-height: 50px;
+}
+
+.breadcrumbs .breadcrumbs-content .breadcrumb-nav {
+    background: transparent;
+    border-radius: 0;
+    margin-bottom: 0;
+    padding: 0;
+    display: inline-block;
+}
+
+.breadcrumbs .breadcrumb-nav {
+    text-align: right;
+}
+
+.breadcrumbs .breadcrumb-nav li {
+    display: inline-block;
+    position: relative;
+    padding-right: 15px;
+    margin-right: 15px;
+    text-transform: capitalize;
+}
+
+.breadcrumbs .breadcrumb-nav li:after {
+    content: "\ea5c";
+    font-family: lineIcons;
+    font-size: 10px;
+    position: absolute;
+    top: 4px;
+    right: -7px;
+}
+
+.breadcrumbs .breadcrumb-nav li:last-child {
+    margin: 0;
+    padding: 0;
+}
+
+.breadcrumbs .breadcrumb-nav li:last-child::after {
+    display: none;
+}
+
+.breadcrumbs .breadcrumb-nav li,
+.breadcrumbs .breadcrumb-nav li a {
+    color: #fff;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.breadcrumbs .breadcrumb-nav li a {
+    position: relative;
+}
+
+.breadcrumbs .breadcrumb-nav li a:hover {
+    color: #5830E0;
+}
+
+.section {
+    padding-top: 100px;
+    padding-bottom: 100px;
+    position: relative;
+}
+
+/* Style for the Cancel button */
+.btn-primary {
+    background-color: #f44336;  /* Red background for Cancel */
+    color: white;
+    border: 1px solid #f44336;
+    font-size: 14px;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .btn-primary:hover {
+    background-color: #e53935;  /* Darker red on hover */
+    transform: scale(1.05); /* Slight scaling effect */
+  }
+  
+  .btn-primary:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(244, 67, 54, 0.4); /* Adding focus state */
+  }
+  
+  /* Style for the Save button */
+  .btn-save {
+    background-color: #4CAF50;  /* Green background for Save */
+    color: white;
+    border: 1px solid #4CAF50;
+    font-size: 14px;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .btn-save:hover {
+    background-color: #388E3C;  /* Darker green on hover */
+    transform: scale(1.05); /* Slight scaling effect */
+  }
+  
+  .btn-save:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.4); /* Adding focus state */
+  }
+  
+  /* Add spacing between buttons */
+  button {
+    margin-right: 10px;
+  }
+  
+  .breadcrumbs {
+    position: relative;
+    padding-bottom: 45px;
+    padding-top: 140px;
+    background: #081828;
+    z-index: 2;
+    text-align: left;
+}
+
+.breadcrumbs .breadcrumbs-content {
+    position: relative;
+    text-align: left;
+}
+
+.breadcrumbs .breadcrumbs-content .page-title {
+    font-size: 20px;
+    color: #fff;
+    font-weight: 600;
+    position: relative;
+    line-height: 50px;
+}
+
+.breadcrumbs .breadcrumbs-content .breadcrumb-nav {
+    background: transparent;
+    border-radius: 0;
+    margin-bottom: 0;
+    padding: 0;
+    display: inline-block;
+}
+
+.breadcrumbs .breadcrumb-nav {
+    text-align: right;
+}
+
+.breadcrumbs .breadcrumb-nav li {
+    display: inline-block;
+    position: relative;
+    padding-right: 15px;
+    margin-right: 15px;
+    text-transform: capitalize;
+}
+
+.breadcrumbs .breadcrumb-nav li:after {
+    content: "\ea5c";
+    font-family: lineIcons;
+    font-size: 10px;
+    position: absolute;
+    top: 4px;
+    right: -7px;
+}
+
+.breadcrumbs .breadcrumb-nav li:last-child {
+    margin: 0;
+    padding: 0;
+}
+
+.breadcrumbs .breadcrumb-nav li:last-child::after {
+    display: none;
+}
+
+.breadcrumbs .breadcrumb-nav li,
+.breadcrumbs .breadcrumb-nav li a {
+    color: #fff;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.breadcrumbs .breadcrumb-nav li a {
+    position: relative;
+}
+
+.breadcrumbs .breadcrumb-nav li a:hover {
+    color: #5830E0;
+}
+
+.section {
+    padding-top: 100px;
+    padding-bottom: 100px;
+    position: relative;
+}

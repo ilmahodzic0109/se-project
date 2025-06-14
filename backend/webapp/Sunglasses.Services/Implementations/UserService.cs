@@ -13,9 +13,11 @@ namespace Sunglasses.Services.Implementations
     public class UserService : IUserService
     {
         private readonly IUserRepository _userRepository;
-        public UserService(IUserRepository userRepository)
+        private readonly ICartRepository _cartRepository;
+        public UserService(IUserRepository userRepository, ICartRepository cartRepository)
         {
             _userRepository = userRepository;
+            _cartRepository = cartRepository;
         }
         public async Task<User> RegisterUserAsync(string email, string password)
         {
@@ -64,6 +66,7 @@ namespace Sunglasses.Services.Implementations
             existingUser.IsLogged = false;
             _userRepository.UpdateUser(existingUser);
             await _userRepository.SaveAsync();
+            await _cartRepository.ClearCartForUserAsync(userId);
         }
 
 
