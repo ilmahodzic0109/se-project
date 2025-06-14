@@ -1,28 +1,30 @@
 <div class="cart-single-list">
-    <div class="cart-image">
-      <a href="/item">
-        <img src="assets/images/placeholder.jpg" alt="Product Image">
-      </a>
-    </div>
-    <div class="product-details">
-      <h5 class="product-name">
-        <a href="/item">Product Name</a>
-      </h5>
-      <p class="product-des">
-        <span><em>Color:</em> Black</span>
-      </p>
-    </div>
-    <div class="quantity-info">
-      <input 
-        type="number" 
-        min="1" 
-        value="1" />
-    </div>
-    <div class="product-price">
-      <p>$0.00</p>
-    </div>
-    <div class="remove-item-container">
-      <input type="checkbox" />
-    </div>
+  <div class="cart-image">
+    <a href="/item/{{ item.productId }}">
+      <img [src]="item.image" alt="Product Image">
+    </a>
   </div>
-  
+  <div class="product-details">
+    <h5 class="product-name">
+      <a href="/item/{{ item.productId }}">{{ item.brandName }} </a>
+    </h5>
+    <p class="product-des">
+      <span><em>Color:</em> {{ item.colorName }}</span>
+    </p>
+  </div>
+  <div class="quantity-info">
+    <input 
+      type="number" 
+      [(ngModel)]="item.quantity" 
+      (ngModelChange)="onQuantityChange()" 
+      min="1" 
+      [value]="item.quantity" 
+      (input)="restrictQuantity()" />
+  </div>
+  <div class="product-price">
+    <p>${{ item.subtotal }}</p>
+  </div>
+  <div class="remove-item-container">
+    <input type="checkbox" [(ngModel)]="item.isSelected" (change)="onCheckboxChange()" />
+  </div>
+</div>

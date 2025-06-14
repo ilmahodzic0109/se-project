@@ -31,7 +31,7 @@
                                         <div class="single-form form-default">
                                             <label>Mailing Address</label>
                                             <div class="form-input form">
-                                              <input type="text" placeholder="1234 Main St, Apartment 4B" required>
+                                              <input type="text" [(ngModel)]="orderDetails.address" placeholder="1234 Main St, Apartment 4B" required>
                                             </div>
                                           </div>
                                         </div>
@@ -39,7 +39,7 @@
                                           <div class="single-form form-default">
                                             <label>City</label>
                                             <div class="form-input form">
-                                              <input type="text" placeholder="City" required>
+                                              <input type="text" [(ngModel)]="orderDetails.city" placeholder="City" required>
                                             </div>
                                           </div>
                                         </div>
@@ -47,7 +47,7 @@
                                           <div class="single-form form-default">
                                             <label>Country</label>
                                             <div class="form-input form">
-                                              <input type="text" placeholder="Country" required>
+                                              <input type="text" [(ngModel)]="orderDetails.country" placeholder="Country" required>
                                             </div>
                                           </div>
                                         </div>
@@ -55,7 +55,7 @@
                                           <div class="single-form form-default">
                                             <label>Post Code</label>
                                             <div class="form-input form">
-                                              <input type="text" placeholder="Post Code" required>
+                                              <input type="text" [(ngModel)]="orderDetails.postalCode" placeholder="Post Code" required>
                                             </div>
                                           </div>
                                         </div>
@@ -63,7 +63,7 @@
                                           <div class="single-form form-default">
                                             <label>Phone Number</label>
                                             <div class="form-input form">
-                                              <input type="text" placeholder="+387 (xx) xxx-xxxx" required>
+                                              <input type="text" [(ngModel)]="orderDetails.phoneNumber" placeholder="+387 (xx) xxx-xxxx" required>
                                             </div>
                                           </div>
                                         </div>
@@ -76,10 +76,19 @@
                                         </div>
                                     </div>
                                     <div class="col-md-12">
-                                        <div class="single-form button" style="color: #5830E0;">
-                                            <button class="btn">Order Now</button>
+                                        <div class="single-form button"style="color: #5830E0;">
+                                            <button class="btn"  (click)="placeOrder()" [disabled]="!orderDetails.address || !orderDetails.city || !orderDetails.country || !orderDetails.postalCode || !orderDetails.phoneNumber">Order Now</button>
                                         </div>
                                     </div>
+                                    <div *ngIf="orderPlaced" class="alert-success">
+                                        <strong>Success!</strong> Your order has been placed successfully.
+                                    </div>
+                                    <div *ngIf="noSelectedItemsError" class="alert alert-danger">
+                                        <strong>Error!</strong> You must select at least one item to place the order.
+                                    </div>
+                                    <div *ngIf="quantityErrorMessage" class="alert alert-danger">
+                                        <strong>Error!</strong> Not enough stock for one or more products.
+                                      </div>
                                 </div>
                             </section>
                         </li>
@@ -91,32 +100,23 @@
                     <div class="checkout-sidebar-price-table">
                         <h6 class="title" style="color: #5830E0; font-weight: bold;font-size:20px">Pricing Table</h6>
 
-                        <div class="sub-total-price">
+                        <div class="sub-total-price" *ngFor="let item of cartItems">
                             <div class="total-price">
-                                <p class="value" style="font-size:18px;">Ray-Ban Aviator 2x</p>
-                                <span style="display: flex; align-items: center;">
-                                    <p class="price" style="margin-right: 10px;">240$</p>
-                                    <button class="remove-btn">
-                                        <i class="fa fa-times"></i>
-                                    </button>
-                                </span>
+                            <p class="value" style=" font-size:18px; ">{{ item.brandName }} {{ item.quantity }}x</p>
+                            
+                            <span style="display: flex; align-items: center;">
+                              <p class="price" style="margin-right: 10px;">{{ item.total }}$</p>
+                              <button class="remove-btn" (click)="removeItemFromCheckout(item.productId)">
+                                <i class="fa fa-times"></i>
+                              </button>
+                            </span>
+                            
                             </div>
-                        </div>
-                        <div class="sub-total-price">
-                            <div class="total-price">
-                                <p class="value" style="font-size:18px;">Oakley Holbrook 1x</p>
-                                <span style="display: flex; align-items: center;">
-                                    <p class="price" style="margin-right: 10px;">150$</p>
-                                    <button class="remove-btn">
-                                        <i class="fa fa-times"></i>
-                                    </button>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="total-payable">
-                            <div class="payable-price">
-                                <p class="value" style="font-size:15px">Subtotal Price:</p>
-                                <p class="price">390$</p>
+                          </div>
+                            <div class="total-payable">
+                              <div class="payable-price">
+                                <p class="value" style=" font-size:15px">Subtotal Price:</p>
+                                <p class="price">{{ totalAmount }}$</p>
                             </div>
                         </div>
                     </div>

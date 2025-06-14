@@ -1,37 +1,38 @@
 <div class="row g-3">
-    <div class="col-lg-4 col-md-6 col-12">
-      <div class="single-item-grid">
-        <div class="image">
-          <a href="/item">
-            <img src="assets/images/placeholder.jpg" alt="Product Image">
-          </a>
+  <div class="col-lg-4 col-md-6 col-12" *ngFor="let product of products">
+    <div class="single-item-grid">
+      <div class="image">
+        <a href="/item/{{ product.productId }}">
+          <img [src]="product.image" alt="{{ product.brandName}}">
+        </a>
+        
+      </div>
+      <div class="content">
+        <h3 class="title" >
+          <a href="/item/{{ product.productId }}">{{ product.brandName }}</a>
+        </h3>
+
+      
+        <div class="product-category">
+          <span class="category-label">{{ product.category }}</span>
         </div>
-        <div class="content">
-          <h3 class="title">
-            <a href="/item">Product Name</a>
-          </h3>
-  
-          <div class="product-category">
-            <span class="category-label">Category</span>
+
+        <ul class="info">
+          <li class="price">${{ product.price }}</li>
+          <div class="button-group">
+            <a *ngIf="!isAdmin() && isLoggedIn()" href="/item/{{ product.productId }}" class="icon-link view-details-icon">
+              <i class="lni lni-eye"></i>
+            </a>
+            <a *ngIf="!isAdmin() && isLoggedIn()" href="javascript:void(0)" class="icon-link add-to-cart-icon" (click)="addToCart(product)">
+              <i class="lni lni-cart"></i>
+            </a>
+            <a *ngIf="!isAdmin() && isLoggedIn()" href="javascript:void(0)" class="icon-link buy-now-icon" (click)="buyNow(product)">
+              <i class="lni lni-credit-cards"></i>
+            </a>
           </div>
-  
-          <ul class="info">
-            <li class="price">$0.00</li>
-            <div class="button-group">
-              <a href="/item" class="icon-link view-details-icon">
-                <i class="lni lni-eye"></i>
-              </a>
-              <a href="/cart" class="icon-link add-to-cart-icon">
-                <i class="lni lni-cart"></i>
-              </a>
-              <a href="/checkout" class="icon-link buy-now-icon">
-                <i class="lni lni-credit-cards"></i>
-              </a>
-            </div>
-          </ul>
-        </div>
+        </ul>
       </div>
     </div>
+    <p *ngIf="addedProductId === product.productId" class="success-message">{{ successMessage }}</p>
   </div>
-  
-  
+</div>

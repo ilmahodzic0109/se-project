@@ -1,74 +1,79 @@
-<p>cart works!</p>
 <div class="breadcrumbs">
-    <div class="container">
-      <div class="row align-items-center">
-        <div class="col-lg-6 col-md-6 col-12">
-          <div class="breadcrumbs-content">
-            <h1 class="page-title">Cart</h1>
-          </div>
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-6 col-md-6 col-12">
+        <div class="breadcrumbs-content">
+          <h1 class="page-title">Cart</h1>
         </div>
-        <div class="col-lg-6 col-md-6 col-12">
-          <ul class="breadcrumb-nav">
-            <li><a href="/homepage">Home</a></li>
-            <li>Cart</li>
-          </ul>
-        </div>
+      </div>
+      <div class="col-lg-6 col-md-6 col-12">
+        <ul class="breadcrumb-nav">
+          <li><a href="/homepage">Home</a></li>
+          <li>Cart</li>
+        </ul>
       </div>
     </div>
   </div>
-  
-  <div class="shopping-cart section">
-    <div class="container">
-      <div class="cart-list-head">
-        <div class="cart-list-title">
-          <div class="row align-items-center text-center">
-            <div class="cart-column col-lg-4 col-md-4 col-6 text-left">
-              <p class="cart-column-title">Product Picture</p>
-            </div>
-            <div class="cart-column col-lg-4 col-md-4 col-6 text-left">
-              <p class="cart-column-title">Product Name</p>
-            </div>
-            <div class="cart-column col-lg-3 col-md-3 col-2">
-              <p class="cart-column-title">Quantity</p>
-            </div>
-            <div class="cart-column col-lg-3 col-md-3 col-2">
-              <p class="cart-column-title">Subtotal</p>
-            </div>
+</div>
+
+<div class="shopping-cart section">
+  <div class="container">
+    <div class="cart-list-head">
+      <div class="cart-list-title">
+        <div class="row align-items-center text-center">
+          <div class="cart-column col-lg-4 col-md-4 col-6 text-left">
+            <p class="cart-column-title">Product Picture</p>
+          </div>
+          <div class="cart-column col-lg-4 col-md-4 col-6 text-left">
+            <p class="cart-column-title">Product Name</p>
+          </div>
+          <div class="cart-column col-lg-3 col-md-3 col-2">
+            <p class="cart-column-title">Quantity</p>
+          </div>
+          <div class="cart-column col-lg-3 col-md-3 col-2">
+            <p class="cart-column-title">Subtotal</p>
+          </div>
+          <div class="cart-column col-lg-2 col-md-2 col-2">
+            <p class="cart-column-title">Select</p>
           </div>
         </div>
+      </div>
       </div>
       
+
       <div class="cart-item-list">
-        <!-- Placeholder za cart items -->
-        <div class="cart-item">
-          <p>Your cart is empty</p>
-        </div>
+        
+        <app-cart-item
+          *ngFor="let item of cartItems"
+          [item]="item"
+          (totalUpdated)="onCheckboxChange()"
+        ></app-cart-item>
       </div>
     </div>
-    
     <div class="row">
       <div class="col-12">
-        <div class="total-amount">
-          <div class="row">
-            <div class="col-lg-8 col-md-6 col-12">
-              <div class="left">
-              </div>
-            </div>
-            <div class="col-lg-4 col-md-6 col-12">
-              <div class="right">
-                <ul>
-                  <li>Cart Subtotal<span>0$</span></li>
-                  <li class="last">You Pay<span>0$</span></li>
-                </ul>
-                <div class="button">
-                  <a href="/checkout" class="btn">Checkout</a>
-                  <a href="/categories" class="btn btn-alt">Continue shopping</a>
-                </div>
-              </div>
-            </div>
+          <div class="total-amount">
+              <div class="row">
+                  <div class="col-lg-8 col-md-6 col-12">
+                      <div class="left">
+                          
+                      </div>
+                  </div>
+    <div class="col-lg-4 col-md-6 col-12">
+      <div class="right">
+          <ul>
+              <li>Cart Subtotal<span>{{ totalAmount   }}$</span></li>
+              <li class="last">You Pay<span>{{ totalAmount   }}$</span></li>
+          </ul>
+          <div class="button">
+            <a 
+            href="/checkout" 
+            class="btn" 
+            [ngClass]="{'disabled-btn': !hasSelectedItems()}" 
+            [attr.disabled]="!hasSelectedItems() ? true : null">Checkout</a>
+              <a href="/categories" class="btn btn-alt">Continue shopping</a>
           </div>
-        </div>
       </div>
-    </div>
   </div>
-  
+</div>
+</div>
