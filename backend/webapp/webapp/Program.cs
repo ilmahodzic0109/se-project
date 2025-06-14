@@ -15,7 +15,7 @@ builder.Services.AddControllers();
 
 // Register DbContext with SQL Server connection string
 builder.Services.AddDbContext<WebshopContext>(options =>
-    options.UseSqlServer("Data Source=API2497;Initial Catalog=webshop;Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 
 builder.Services.AddControllers();
