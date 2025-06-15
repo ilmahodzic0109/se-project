@@ -7,7 +7,7 @@ import { environment } from '../../environments/environment'
   providedIn: 'root'
 })
 export class DeleteProductsService {
-  private apiUrl = '${environment.apiUrl}/Products'; 
+  private apiUrl = 'https://sunglasses-api-degkate8a0azc3dr.northeurope-01.azurewebsites.net/api/Products'; 
 
   constructor(private http: HttpClient) {}
   softDeleteProduct(productId: string): Observable<any> {

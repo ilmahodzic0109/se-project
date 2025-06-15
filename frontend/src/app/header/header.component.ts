@@ -1,6 +1,6 @@
-import { Component,OnInit } from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import { Router } from '@angular/router';
-import {CommonModule, NgIf} from '@angular/common';
+import { CommonModule, NgIf, isPlatformBrowser } from '@angular/common';
 import { LogoutService } from '../services/logout.service';
 import { CartService } from '../services/cart.service';
 @Component({
@@ -12,30 +12,29 @@ import { CartService } from '../services/cart.service';
 })
 export class HeaderComponent implements OnInit{
   cartItemCount: number = 0;
-  constructor(private router: Router, private userService: LogoutService, private cartService: CartService) {}
+  constructor(@Inject(PLATFORM_ID) private platformId: Object, private router: Router, private userService: LogoutService, private cartService: CartService) {}
 
   ngOnInit(): void {
-    let userId: string | null = null;
-    if (typeof window !== 'undefined') {
-      userId = localStorage.getItem('userId');
-    }
-    if (userId) {
-      this.cartService.cartItemCount$.subscribe(
-        (count) => {
-          this.cartItemCount = count;
-        },
-        (error) => {
-          console.error('Error fetching cart item count:', error);
-        }
-      );
+    if (isPlatformBrowser(this.platformId)) {
+      const userId = localStorage.getItem('userId');
+      if (userId) {
+        this.cartService.cartItemCount$.subscribe(
+          (count) => {
+            this.cartItemCount = count;
+          },
+          (error) => {
+            console.error('Error fetching cart item count:', error);
+          }
+        );
 
-      
-      this.cartService.getCartItemCount(userId).subscribe();
+        
+        this.cartService.getCartItemCount(userId).subscribe();
+      }
     }
   }
   loadCartItemCount(): void {
     let userId: string | null = null;
-    if (typeof window !== 'undefined') {
+    if (isPlatformBrowser(this.platformId)) {
       userId = localStorage.getItem('userId');
     }
     if (userId) {
@@ -50,18 +49,15 @@ export class HeaderComponent implements OnInit{
     }
   }
   logout(): void {
-    let userId: string | null = null;
-    if (typeof window !== 'undefined') {
-      userId = localStorage.getItem('userId');
-    }
+    const userId = isPlatformBrowser(this.platformId) ? localStorage.getItem('userId') : null;
+
     if (userId) {
       this.userService.logoutUser(userId).subscribe({
         next: () => {
-          if (typeof window !== 'undefined') {
-            localStorage.removeItem('userId');
-            localStorage.removeItem('isAdmin');
-            localStorage.removeItem('isLogged');
-          }
+          localStorage.removeItem('userId');
+          localStorage.removeItem('isAdmin');
+          localStorage.removeItem('isLogged');
+
           this.router.navigate(['/login']);
         },
         error: (err) => {
@@ -73,15 +69,9 @@ export class HeaderComponent implements OnInit{
     }
   }
   isAdmin(): boolean {
-    if (typeof window !== 'undefined') {
-      return localStorage.getItem('isAdmin') === 'true'; 
-    }
-    return false;
+      return isPlatformBrowser(this.platformId) && localStorage.getItem('isAdmin') === 'true'; 
   }
   isLoggedIn(): boolean {
-    if (typeof window !== 'undefined') {
-      return localStorage.getItem('isLogged') === 'true';
-    }
-    return false;
+    return isPlatformBrowser(this.platformId) && localStorage.getItem('isLogged') === 'true';
   }
 }

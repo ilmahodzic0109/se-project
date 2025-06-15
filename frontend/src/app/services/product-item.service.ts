@@ -1,5 +1,6 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { isPlatformBrowser } from '@angular/common';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment'
 @Injectable({
@@ -7,9 +8,9 @@ import { environment } from '../../environments/environment'
 })
 export class ProductItemService {
 
-  private apiUrl = '${environment.apiUrl}/Products/shop';  
+  private apiUrl = 'https://sunglasses-api-degkate8a0azc3dr.northeurope-01.azurewebsites.net/api/Products/shop';  
 
-  constructor(private http: HttpClient) {}
+  constructor(@Inject(PLATFORM_ID) private platformId: Object, private http: HttpClient) {}
 
   getProductsForShop(
     pageNumber: number,
@@ -23,7 +24,7 @@ export class ProductItemService {
     
   ): Observable<any> {
     let isAdmin = false;
-    if (typeof window !== 'undefined') {
+    if (isPlatformBrowser(this.platformId)) {
       isAdmin = localStorage.getItem('isAdmin') === 'true';
     }
     const headers = new HttpHeaders({

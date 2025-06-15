@@ -1,5 +1,5 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { CommonModule, NgFor } from '@angular/common';
+import { Component, OnInit, Input, OnChanges, SimpleChanges, Inject, PLATFORM_ID } from '@angular/core';
+import { CommonModule, NgFor, isPlatformBrowser } from '@angular/common';
 import { ProductItemService } from '../services/product-item.service';
 import { CartService } from '../services/cart.service';  // Import CartService
 import { RouterModule, Router } from '@angular/router';
@@ -35,6 +35,7 @@ export class ItemCategoriesComponent implements OnInit, OnChanges {
   addedProductId: string | null = null; 
 
   constructor(
+    @Inject(PLATFORM_ID) private platformId: Object,
     private productService: ProductItemService,
     private cartService: CartService ,
     private router: Router
@@ -74,10 +75,8 @@ export class ItemCategoriesComponent implements OnInit, OnChanges {
   }
 
   addToCart(product: Product): void {
-    let userId: string | null = null;
-    if (typeof window !== 'undefined') {
-      userId = localStorage.getItem('userId');
-    }
+    const userId = isPlatformBrowser(this.platformId) ? localStorage.getItem('userId') : null;
+
     if (userId) {
       const quantity = 1;  
       this.cartService.addToCart(userId, product.productId, quantity).subscribe(
@@ -97,10 +96,8 @@ export class ItemCategoriesComponent implements OnInit, OnChanges {
   }
 
   updateCartCount(): void {
-    let userId: string | null = null;
-    if (typeof window !== 'undefined') {
-      userId = localStorage.getItem('userId');
-    }
+    const userId = isPlatformBrowser(this.platformId) ? localStorage.getItem('userId') : null;
+
     if (userId) {
       this.cartService.getCartItems(userId).subscribe(
         (data) => {
@@ -108,9 +105,8 @@ export class ItemCategoriesComponent implements OnInit, OnChanges {
           data.cartItems.forEach((item: any) => {
             totalQuantity += item.quantity;
           });
-          if (typeof window !== 'undefined') {
-            localStorage.setItem('cartItemCount', totalQuantity.toString());
-          }
+          localStorage.setItem('cartItemCount', totalQuantity.toString());
+
         },
         (error) => {
           console.error('Error fetching cart items for count:', error);
@@ -120,17 +116,11 @@ export class ItemCategoriesComponent implements OnInit, OnChanges {
   }
 
   isAdmin(): boolean {
-    if (typeof window !== 'undefined') {
-      return localStorage.getItem('isAdmin') === 'true'; 
-    }
-    return false;
+      return isPlatformBrowser(this.platformId) && localStorage.getItem('isAdmin') === 'true'; 
   }
 
   isLoggedIn(): boolean {
-    if (typeof window !== 'undefined') {
-      return localStorage.getItem('isLogged') === 'true';
-    }
-    return false;
+    return isPlatformBrowser(this.platformId) && localStorage.getItem('isLogged') === 'true';
   }
 
   buyNow(product: Product): void {
@@ -139,7 +129,7 @@ export class ItemCategoriesComponent implements OnInit, OnChanges {
       return;
     }
 
-    const userId = localStorage.getItem('userId');
+    const userId = isPlatformBrowser(this.platformId) ? localStorage.getItem('userId') : null;
     if (userId) {
       const productId = product.productId;
       const quantity = 1;  

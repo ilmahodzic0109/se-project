@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Inject, PLATFORM_ID } from '@angular/core';
 import { ItemCategoriesComponent } from '../item-categories/item-categories.component';
-import { CommonModule, NgIf } from '@angular/common';
+import { CommonModule, NgIf, isPlatformBrowser } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ProductItemService } from '../services/product-item.service';
 
@@ -28,7 +28,7 @@ export class CategoriesComponent {
   products: any[] = [];
   noResultsFound: boolean = false; 
 
-  constructor(private productService: ProductItemService) {}
+  constructor(@Inject(PLATFORM_ID) private platformId: Object, private productService: ProductItemService) {}
 
   ngOnInit(): void {
     this.loadProducts();
@@ -91,10 +91,7 @@ export class CategoriesComponent {
   }
 
   isAdmin(): boolean {
-    if (typeof window !== 'undefined') {
-      return localStorage.getItem('isAdmin') === 'true';
-    }
-    return false;
+    return isPlatformBrowser(this.platformId) && localStorage.getItem('isAdmin') === 'true';
   }
 
   

@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductService } from '../services/product.service';
-import { CommonModule, NgIf } from '@angular/common';
+import { CommonModule, NgIf, isPlatformBrowser } from '@angular/common';
 import { DatePipe } from '@angular/common';
 import { DeleteProductsService } from '../services/delete-products.service';  
 import { FormsModule } from '@angular/forms';
@@ -26,6 +26,7 @@ export class ItemComponent implements OnInit {
   showSuccessMessage: boolean = false;
   
   constructor(
+    @Inject(PLATFORM_ID) private platformId: Object,
     private route: ActivatedRoute,
     private productService: ProductService,
     private productDeleteService: DeleteProductsService,  
@@ -69,7 +70,7 @@ export class ItemComponent implements OnInit {
   }
 
   isAdmin(): boolean {
-    return localStorage.getItem('isAdmin') === 'true'; 
+    return isPlatformBrowser(this.platformId) && localStorage.getItem('isAdmin') === 'true'; 
   }
 
   openDeleteModal() {
@@ -93,7 +94,7 @@ export class ItemComponent implements OnInit {
     );
   }
   isLoggedIn(): boolean {
-    return localStorage.getItem('isLogged') === 'true';
+    return isPlatformBrowser(this.platformId) && localStorage.getItem('isLogged') === 'true';
   }
   alertLoginRequired(): void {
     this.showLoginMessage = true;
@@ -122,7 +123,7 @@ export class ItemComponent implements OnInit {
       return;
     }
 
-    const userId = localStorage.getItem('userId'); 
+    const userId = isPlatformBrowser(this.platformId) ? localStorage.getItem('userId') : null; 
     if (userId) {
       this.cartService.addToCart(userId, this.productId, this.quantity).subscribe(
         response => {
@@ -146,7 +147,7 @@ export class ItemComponent implements OnInit {
       return;
     }
   
-    const userId = localStorage.getItem('userId');
+    const userId = isPlatformBrowser(this.platformId) ? localStorage.getItem('userId') : null;
     if (userId) {
       const productId = this.productDetails.productId;
       const quantity = this.quantity;

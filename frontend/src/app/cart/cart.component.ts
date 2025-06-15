@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import { CartService } from '../services/cart.service';
-import { CommonModule } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { CartItemComponent } from '../cart-item/cart-item.component';
 
 @Component({
@@ -14,28 +14,27 @@ export class CartComponent implements OnInit {
   cartItems: any[] = []; 
   totalAmount: number = 0; 
 
-  constructor(private cartService: CartService) {}
+  constructor(@Inject(PLATFORM_ID) private platformId: Object, private cartService: CartService) {}
 
   ngOnInit(): void {
     this.loadCartItems();
   }
 
   loadCartItems(): void {
-    let userId: string | null = null;
-    if (typeof window !== 'undefined') {
-      userId = localStorage.getItem('userId');
-    }
-    if (userId) {
-      this.cartService.getCartItems(userId).subscribe(
-        (data) => {
-          console.log('Cart items:', data);
-          this.cartItems = data.cartItems;
-          this.calculateTotalAmount(); 
-        },
-        (error) => {
-          console.error('Error fetching cart items:', error);
-        }
-      );
+    if (isPlatformBrowser(this.platformId)) {
+      const userId = localStorage.getItem('userId');
+      if (userId) {
+        this.cartService.getCartItems(userId).subscribe(
+          (data) => {
+            console.log('Cart items:', data);
+            this.cartItems = data.cartItems;
+            this.calculateTotalAmount(); 
+          },
+          (error) => {
+            console.error('Error fetching cart items:', error);
+          }
+        );
+      }
     }
   }
   

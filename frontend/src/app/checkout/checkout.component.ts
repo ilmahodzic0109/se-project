@@ -1,6 +1,6 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Inject, PLATFORM_ID } from '@angular/core';
 import { CartService } from '../services/cart.service';
-import { CommonModule, NgFor } from '@angular/common';
+import { CommonModule, NgFor, isPlatformBrowser } from '@angular/common';
 import { Router, NavigationStart, ActivatedRoute } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 @Component({
@@ -24,16 +24,16 @@ export class CheckoutComponent implements OnInit {
   orderPlaced: boolean = false;
   noSelectedItemsError: boolean = false;
   quantityErrorMessage: string = '';
-  constructor(private cartService: CartService, private router: Router, private route: ActivatedRoute) { }
+  constructor(@Inject(PLATFORM_ID) private platformId: Object, private cartService: CartService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    if (typeof window !== 'undefined') {
+    if (isPlatformBrowser(this.platformId)) {
       this.userId = localStorage.getItem('userId') || '';
-    }
-    if (this.userId) {
-      this.loadSelectedCartItems();
-    } else {
-      console.error("User is not logged in");
+      if (this.userId) {
+        this.loadSelectedCartItems();
+      } else {
+        console.error("User is not logged in");
+      }
     }
     this.route.queryParams.subscribe((params:any) => {
       const productId = params['productId'];

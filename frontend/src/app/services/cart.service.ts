@@ -8,7 +8,7 @@ import { environment } from '../../environments/environment'
   providedIn: 'root',
 })
 export class CartService {
-  private apiUrl = '${environment.apiUrl}/Cart';  
+  private apiUrl = 'https://sunglasses-api-degkate8a0azc3dr.northeurope-01.azurewebsites.net/api/Cart';  
   private cartItemCountSubject = new BehaviorSubject<number>(0);  
 
   cartItemCount$ = this.cartItemCountSubject.asObservable();

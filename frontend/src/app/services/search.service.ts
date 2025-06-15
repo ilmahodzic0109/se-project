@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from '../../environments/environment'
 
 interface Product {
   ProductId: string;
@@ -16,7 +15,7 @@ interface Product {
   providedIn: 'root'
 })
 export class SearchService {
-  private apiUrl = '${environment.apiUrl}/Products/search';  
+  private apiUrl = 'https://sunglasses-api-degkate8a0azc3dr.northeurope-01.azurewebsites.net/api/Products/search';  
 
   constructor(private http: HttpClient) {}
 

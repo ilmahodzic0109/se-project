@@ -6,7 +6,7 @@ import { environment } from '../../environments/environment'
   providedIn: 'root'
 })
 export class LogoutService {
-  private apiUrl = '${environment.apiUrl}/User/logout';  
+  private apiUrl = 'https://sunglasses-api-degkate8a0azc3dr.northeurope-01.azurewebsites.net/api/User/logout';  
 
   constructor(private http: HttpClient) {}
 

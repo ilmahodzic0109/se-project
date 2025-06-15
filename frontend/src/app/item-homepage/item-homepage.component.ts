@@ -1,5 +1,5 @@
-import { Component,OnInit, Input } from '@angular/core';
-import { CommonModule, NgFor } from '@angular/common';
+import { Component, OnInit, Input, Inject, PLATFORM_ID } from '@angular/core';
+import { CommonModule, NgFor, isPlatformBrowser } from '@angular/common';
 import { SearchService } from '../services/search.service';
 import { CartService } from '../services/cart.service';  
 import { Router } from '@angular/router';
@@ -17,6 +17,7 @@ export class ItemHomepageComponent implements OnInit {
   successMessage: string = '';  
   addedProductId: string | null = null;
   constructor(
+    @Inject(PLATFORM_ID) private platformId: Object,
     private productService: SearchService,
     private cartService: CartService,
     private router: Router
@@ -35,16 +36,10 @@ export class ItemHomepageComponent implements OnInit {
     this.loadProducts(filters.brandName, categoryNumber);
   }
   isAdmin(): boolean {
-    if (typeof window !== 'undefined') {
-      return localStorage.getItem('isAdmin') === 'true'; 
-    }
-    return false;
+    return isPlatformBrowser(this.platformId) && localStorage.getItem('isAdmin') === 'true'; 
   }
   isLoggedIn(): boolean {
-    if (typeof window !== 'undefined') {
-      return localStorage.getItem('isLogged') === 'true';
-    }
-    return false;
+    return isPlatformBrowser(this.platformId) && localStorage.getItem('isLogged') === 'true';
   }
   
   loadProducts(brandName: string = '', category: number | null = null) {
@@ -61,10 +56,8 @@ export class ItemHomepageComponent implements OnInit {
     );
   }
   addToCart(product: any): void {
-    let userId: string | null = null;
-    if (typeof window !== 'undefined') {
-      userId = localStorage.getItem('userId');
-    }
+    const userId = isPlatformBrowser(this.platformId) ? localStorage.getItem('userId') : null;
+
     if (userId) {
       const quantity = 1;  
       this.cartService.addToCart(userId, product.productId, quantity).subscribe(
@@ -86,10 +79,8 @@ export class ItemHomepageComponent implements OnInit {
 
   
   updateCartCount(): void {
-    let userId: string | null = null;
-    if (typeof window !== 'undefined') {
-      userId = localStorage.getItem('userId');
-    }
+    const userId = isPlatformBrowser(this.platformId) ? localStorage.getItem('userId') : null;
+
     if (userId) {
       this.cartService.getCartItems(userId).subscribe(
         (data) => {
@@ -97,9 +88,7 @@ export class ItemHomepageComponent implements OnInit {
           data.cartItems.forEach((item: any) => {
             totalQuantity += item.quantity;  
           });
-          if (typeof window !== 'undefined') {
-            localStorage.setItem('cartItemCount', totalQuantity.toString());  
-          }
+          localStorage.setItem('cartItemCount', totalQuantity.toString());  
         },
         (error) => {
           console.error('Error fetching cart items for count:', error);
@@ -113,7 +102,7 @@ export class ItemHomepageComponent implements OnInit {
       return;
     }
 
-    const userId = localStorage.getItem('userId');
+    const userId = isPlatformBrowser(this.platformId) ? localStorage.getItem('userId') : null;
     if (userId) {
       const productId = product.productId;
       const quantity = 1; 

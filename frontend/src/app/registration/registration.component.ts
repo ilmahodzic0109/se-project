@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, Inject, PLATFORM_ID } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { RegistrationService } from '../services/registration.service';
-import { CommonModule, NgIf } from '@angular/common';
+import { CommonModule, NgIf, isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-registration',
@@ -21,7 +21,7 @@ export class RegistrationComponent {
   showPasswordError: boolean = false;
   showEmailError: boolean = false;
 
-  constructor(private registrationService: RegistrationService, private router: Router) {}
+  constructor(@Inject(PLATFORM_ID) private platformId: Object, private registrationService: RegistrationService, private router: Router) {}
 
   onRegister() {
     
@@ -36,10 +36,10 @@ export class RegistrationComponent {
     this.registrationService.registerUser(this.user).subscribe({
       next: (response) => {
         console.log('Registration successful:', response);
-        if (typeof window !== 'undefined') {
+        if (isPlatformBrowser(this.platformId)) {
           localStorage.setItem('userId', response.userId); 
           localStorage.setItem('isAdmin', response.isAdmin.toString());
-          localStorage.setItem('isLogged', 'true');  
+          localStorage.setItem('isLogged', 'true');
         }
         this.showSuccessMessage = true; 
        
