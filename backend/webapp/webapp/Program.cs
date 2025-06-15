@@ -10,6 +10,8 @@ using SunglassesDAL.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Logging.ClearProviders();
+builder.Logging.AddConsole();   // logovi će ići na stdout
 
 builder.Services.AddControllers();
 
