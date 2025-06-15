@@ -8,6 +8,7 @@
     "build:prod": "ng build --configuration production && ng run webpage:server:production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
+    "build:ssr": "ng build --configuration production && ng run webpage:server:production",
     "serve:ssr:webpage": "node dist/webpage/server/server.mjs"
   },
   "private": true,
