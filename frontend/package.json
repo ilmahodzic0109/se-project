@@ -5,11 +5,10 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "build:prod": "ng build --configuration production && ng run webpage:server:production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "build:ssr": "ng build --configuration production && ng run webpage:server:production",
-    "serve:ssr:webpage": "node dist/webpage/server/server.mjs"
+    "build:ssr": "ng build --configuration production",
+    "serve:ssr": "node dist/server/server.mjs"
   },
   "private": true,
   "dependencies": {
