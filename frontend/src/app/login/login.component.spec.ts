@@ -44,9 +44,11 @@ describe('LoginComponent', () => {
     expect(component.successMessage).toBe('Login successful! Welcome back.');
     expect(component.errorMessage).toBeNull();
 
-    expect(localStorage.getItem('userId')).toBe('123');
-    expect(localStorage.getItem('isAdmin')).toBe('false');
-    expect(localStorage.getItem('isLogged')).toBe('true');
+    if (typeof window !== 'undefined') {
+      expect(localStorage.getItem('userId')).toBe('123');
+      expect(localStorage.getItem('isAdmin')).toBe('false');
+      expect(localStorage.getItem('isLogged')).toBe('true');
+    }
     tick(3000);
 
     expect(mockRouter.navigate).toHaveBeenCalledWith(['/homepage']);

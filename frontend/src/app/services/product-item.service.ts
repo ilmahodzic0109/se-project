@@ -22,7 +22,10 @@ export class ProductItemService {
     brandName: string = ''
     
   ): Observable<any> {
-    const isAdmin = localStorage.getItem('isAdmin') === 'true';
+    let isAdmin = false;
+    if (typeof window !== 'undefined') {
+      isAdmin = localStorage.getItem('isAdmin') === 'true';
+    }
     const headers = new HttpHeaders({
       'isAdmin': isAdmin.toString()
     });

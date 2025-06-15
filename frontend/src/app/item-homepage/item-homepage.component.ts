@@ -35,10 +35,16 @@ export class ItemHomepageComponent implements OnInit {
     this.loadProducts(filters.brandName, categoryNumber);
   }
   isAdmin(): boolean {
-    return localStorage.getItem('isAdmin') === 'true'; 
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('isAdmin') === 'true'; 
+    }
+    return false;
   }
   isLoggedIn(): boolean {
-    return localStorage.getItem('isLogged') === 'true';
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('isLogged') === 'true';
+    }
+    return false;
   }
   
   loadProducts(brandName: string = '', category: number | null = null) {
@@ -55,7 +61,10 @@ export class ItemHomepageComponent implements OnInit {
     );
   }
   addToCart(product: any): void {
-    const userId = localStorage.getItem('userId');
+    let userId: string | null = null;
+    if (typeof window !== 'undefined') {
+      userId = localStorage.getItem('userId');
+    }
     if (userId) {
       const quantity = 1;  
       this.cartService.addToCart(userId, product.productId, quantity).subscribe(
@@ -77,7 +86,10 @@ export class ItemHomepageComponent implements OnInit {
 
   
   updateCartCount(): void {
-    const userId = localStorage.getItem('userId');
+    let userId: string | null = null;
+    if (typeof window !== 'undefined') {
+      userId = localStorage.getItem('userId');
+    }
     if (userId) {
       this.cartService.getCartItems(userId).subscribe(
         (data) => {
@@ -85,7 +97,9 @@ export class ItemHomepageComponent implements OnInit {
           data.cartItems.forEach((item: any) => {
             totalQuantity += item.quantity;  
           });
-          localStorage.setItem('cartItemCount', totalQuantity.toString());  
+          if (typeof window !== 'undefined') {
+            localStorage.setItem('cartItemCount', totalQuantity.toString());  
+          }
         },
         (error) => {
           console.error('Error fetching cart items for count:', error);

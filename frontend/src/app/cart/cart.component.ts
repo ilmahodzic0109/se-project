@@ -21,7 +21,10 @@ export class CartComponent implements OnInit {
   }
 
   loadCartItems(): void {
-    const userId = localStorage.getItem('userId'); 
+    let userId: string | null = null;
+    if (typeof window !== 'undefined') {
+      userId = localStorage.getItem('userId');
+    }
     if (userId) {
       this.cartService.getCartItems(userId).subscribe(
         (data) => {

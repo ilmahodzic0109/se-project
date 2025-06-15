@@ -27,7 +27,9 @@ export class CheckoutComponent implements OnInit {
   constructor(private cartService: CartService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.userId = localStorage.getItem('userId') || '';  
+    if (typeof window !== 'undefined') {
+      this.userId = localStorage.getItem('userId') || '';
+    }
     if (this.userId) {
       this.loadSelectedCartItems();
     } else {

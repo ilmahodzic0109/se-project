@@ -36,12 +36,11 @@ export class RegistrationComponent {
     this.registrationService.registerUser(this.user).subscribe({
       next: (response) => {
         console.log('Registration successful:', response);
-
-        
-        localStorage.setItem('userId', response.userId); 
-        localStorage.setItem('isAdmin', response.isAdmin.toString());
-        localStorage.setItem('isLogged', 'true');  
-
+        if (typeof window !== 'undefined') {
+          localStorage.setItem('userId', response.userId); 
+          localStorage.setItem('isAdmin', response.isAdmin.toString());
+          localStorage.setItem('isLogged', 'true');  
+        }
         this.showSuccessMessage = true; 
        
         setTimeout(() => {

@@ -20,7 +20,9 @@ import { Router } from '@angular/router';
     ) { }
   
     ngOnInit(): void {
-      this.userId = localStorage.getItem('userId') || '';
+      if (typeof window !== 'undefined') {
+        this.userId = localStorage.getItem('userId') || '';
+      }
       if (this.userId) {
         this.fetchPurchaseHistory();
       }

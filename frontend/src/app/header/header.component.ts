@@ -15,9 +15,11 @@ export class HeaderComponent implements OnInit{
   constructor(private router: Router, private userService: LogoutService, private cartService: CartService) {}
 
   ngOnInit(): void {
-    const userId = localStorage.getItem('userId');
+    let userId: string | null = null;
+    if (typeof window !== 'undefined') {
+      userId = localStorage.getItem('userId');
+    }
     if (userId) {
-      
       this.cartService.cartItemCount$.subscribe(
         (count) => {
           this.cartItemCount = count;
@@ -32,7 +34,10 @@ export class HeaderComponent implements OnInit{
     }
   }
   loadCartItemCount(): void {
-    const userId = localStorage.getItem('userId');
+    let userId: string | null = null;
+    if (typeof window !== 'undefined') {
+      userId = localStorage.getItem('userId');
+    }
     if (userId) {
       this.cartService.getCartItemCount(userId).subscribe(
         (response) => {
@@ -45,14 +50,18 @@ export class HeaderComponent implements OnInit{
     }
   }
   logout(): void {
-    const userId = localStorage.getItem('userId');  
-
+    let userId: string | null = null;
+    if (typeof window !== 'undefined') {
+      userId = localStorage.getItem('userId');
+    }
     if (userId) {
       this.userService.logoutUser(userId).subscribe({
         next: () => {
-          localStorage.removeItem('userId');
-          localStorage.removeItem('isAdmin');
-          localStorage.removeItem('isLogged');
+          if (typeof window !== 'undefined') {
+            localStorage.removeItem('userId');
+            localStorage.removeItem('isAdmin');
+            localStorage.removeItem('isLogged');
+          }
           this.router.navigate(['/login']);
         },
         error: (err) => {
@@ -64,9 +73,15 @@ export class HeaderComponent implements OnInit{
     }
   }
   isAdmin(): boolean {
-    return localStorage.getItem('isAdmin') === 'true'; 
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('isAdmin') === 'true'; 
+    }
+    return false;
   }
   isLoggedIn(): boolean {
-    return localStorage.getItem('isLogged') === 'true';
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('isLogged') === 'true';
+    }
+    return false;
   }
 }

@@ -91,7 +91,10 @@ export class CategoriesComponent {
   }
 
   isAdmin(): boolean {
-    return localStorage.getItem('isAdmin') === 'true';
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('isAdmin') === 'true';
+    }
+    return false;
   }
 
   

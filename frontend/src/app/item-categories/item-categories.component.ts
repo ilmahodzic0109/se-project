@@ -74,7 +74,10 @@ export class ItemCategoriesComponent implements OnInit, OnChanges {
   }
 
   addToCart(product: Product): void {
-    const userId = localStorage.getItem('userId');
+    let userId: string | null = null;
+    if (typeof window !== 'undefined') {
+      userId = localStorage.getItem('userId');
+    }
     if (userId) {
       const quantity = 1;  
       this.cartService.addToCart(userId, product.productId, quantity).subscribe(
@@ -94,7 +97,10 @@ export class ItemCategoriesComponent implements OnInit, OnChanges {
   }
 
   updateCartCount(): void {
-    const userId = localStorage.getItem('userId');
+    let userId: string | null = null;
+    if (typeof window !== 'undefined') {
+      userId = localStorage.getItem('userId');
+    }
     if (userId) {
       this.cartService.getCartItems(userId).subscribe(
         (data) => {
@@ -102,7 +108,9 @@ export class ItemCategoriesComponent implements OnInit, OnChanges {
           data.cartItems.forEach((item: any) => {
             totalQuantity += item.quantity;
           });
-          localStorage.setItem('cartItemCount', totalQuantity.toString());
+          if (typeof window !== 'undefined') {
+            localStorage.setItem('cartItemCount', totalQuantity.toString());
+          }
         },
         (error) => {
           console.error('Error fetching cart items for count:', error);
@@ -112,11 +120,17 @@ export class ItemCategoriesComponent implements OnInit, OnChanges {
   }
 
   isAdmin(): boolean {
-    return localStorage.getItem('isAdmin') === 'true'; 
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('isAdmin') === 'true'; 
+    }
+    return false;
   }
 
   isLoggedIn(): boolean {
-    return localStorage.getItem('isLogged') === 'true';
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('isLogged') === 'true';
+    }
+    return false;
   }
 
   buyNow(product: Product): void {
